@@ -26,7 +26,7 @@
     }
 
     .logo-wrapper {
-      margin-top: 2rem;
+      margin-top: 1rem;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -34,7 +34,14 @@
       position: relative;
     }
 
-  
+    .logo-wrapper img {
+      width: 150px;
+      background-color: transparent;
+      padding: 0;
+      border-radius: 0;
+      display: block;
+    }
+
     h1 {
       font-size: 5rem;
       margin: 1rem 0 0 0;
@@ -93,14 +100,7 @@
 <body>
   <div class="container">
     <div class="logo-wrapper">
-      <img src="toulg-logo.jpg" alt="شعار العملة" style="
-  width: 135px;
-  background-color: #000;
-  padding: 10px;
-  border-radius: 10px;
-  display: block;
-  margin: 20px auto 0;
-">
+      <img src="logo-toulg.png" alt="شعار العملة">
     </div>
     <h1>TOULG</h1>
     <p>The Roman Spirit Reborn on Solana. A meme coin forged in the fires of the empire.</p>
@@ -110,7 +110,7 @@
       <a class="btn" href="https://x.com/ToulgTOL?t=iNz0f3kf6Yp4TqCY5-bgWg&s=09" target="_blank">Join Twitter</a>
       <a class="btn" href="https://t.me/TOULGTOL" target="_blank">Join Telegram</a>
       <a class="btn" href="#" target="_blank" id="presale-link">Presale Page</a>
-      <a class="btn" href="#" target="_blank" id="whitepaper-link">Whitepaper</a>
+      <a class="btn" href="https://github.com/djaber198/toulg-website/blob/20e88ac455fc3879a13698a4ebe08508498ea94b/Proposal.pdf" target="_blank" id="whitepaper-link">Whitepaper</a>
     </div>
 
     <div class="footer">
@@ -119,28 +119,29 @@
   </div>
 
   <script>
-    const presaleDate = new Date(2025, 4, 10, 18, 0, 0);
+    const presaleStart = new Date('2025-05-14T06:00:00Z'); // 7:00 AM Algeria Time = 6:00 UTC
+    const presaleEnd = new Date('2025-06-15T06:00:00Z');
 
     function updateCountdown() {
       const now = new Date();
-      const diff = presaleDate - now;
 
-      if (diff <= 0) {
-        document.getElementById("countdown").innerText = "Presale has started!";
-        return;
+      if (now < presaleStart) {
+        const diff = presaleStart - now;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / 1000 / 60) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+        document.getElementById("countdown").innerText = `Presale begins in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+      } else if (now >= presaleStart && now < presaleEnd) {
+        document.getElementById("countdown").innerText = "Presale is LIVE!";
+      } else {
+        document.getElementById("countdown").innerText = "Presale has ended.";
       }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / 1000 / 60) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      document.getElementById("countdown").innerText = `Presale begins in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
     }
 
     setInterval(updateCountdown, 1000);
     updateCountdown();
   </script>
-  
+
 </body>
 </html>
